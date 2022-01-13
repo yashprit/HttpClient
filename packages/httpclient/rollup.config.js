@@ -12,8 +12,6 @@ const typescriptPlugin = typescript({
 const nodeBuiltins = NodeBuiltins();
 const nodeGlobalsPlugin = NodeGlobals();
 
-const external = [/@babel\/runtime/, 'axios'];
-
 const babelPlugin = babel({
   extensions:   ['.js', '.ts'],
   babelHelpers: 'runtime',
@@ -30,7 +28,6 @@ const babelPlugin = babel({
 export default [
   // UMD
   {
-    external,
     input:  'src/index.ts',
     output: {
       file:    'dist/index.umd.js',
@@ -51,16 +48,12 @@ export default [
   },
   // UMD minified
   {
-    external,
     input:  'src/index.ts',
     output: {
       file:    'dist/index.umd.min.js',
       format:  'umd',
       name:    'HttpClient',
       indent:  false,
-      globals: {
-        axios: 'axios',
-      },
     },
     plugins: [
       typescriptPlugin,
